@@ -9,46 +9,46 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    var titleLabel: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "Who is this JoJo Bizarre Adventure's character?"
-        label.textAlignment = .center
-        label.font = UIFont.systemFont(ofSize: 44, weight: .bold)
-        label.numberOfLines = 0
-        return label
-    }()
+    var titleLabel: UILabel!
+    var characterLabel: UILabel!
+    var scoreLabel: UILabel!
     
-    var characterLabel: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "Young Dio Brando"
-        label.textAlignment = .center
-        label.font = UIFont.systemFont(ofSize: 44)
-        return label
-    }()
-    
-    lazy var scoreLabel: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "Score: \(score)"
-        label.textAlignment = . right
-        label.font = UIFont.systemFont(ofSize: 28)
-        return label
-    }()
-    
-    let characterView: UIView = {
-        let characterView = UIView()
-        characterView.translatesAutoresizingMaskIntoConstraints = false
-        characterView.backgroundColor = .yellow
-        characterView.layer.cornerRadius = 15
-        return characterView
-    }()
-   
+    var characterView: UIView!
+
     var characterButtons = [UIButton]()
     
     var score = 0
     
+    let hight = 128
+    let width = 64
+    
+    override func loadView() {
+        super.loadView()
+        
+        titleLabel = UILabel()
+        titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        titleLabel.text = "Who is this JoJo Bizarre Adventure's character?"
+        titleLabel.textAlignment = .center
+        titleLabel.font = UIFont.systemFont(ofSize: 44, weight: .bold)
+        titleLabel.numberOfLines = 0
+        
+        scoreLabel = UILabel()
+        scoreLabel.translatesAutoresizingMaskIntoConstraints = false
+        scoreLabel.text = "Score: \(score)"
+        scoreLabel.textAlignment = . right
+        scoreLabel.font = UIFont.systemFont(ofSize: 28)
+        
+        characterLabel = UILabel()
+        characterLabel.translatesAutoresizingMaskIntoConstraints = false
+        characterLabel.text = "Young Dio Brando"
+        characterLabel.textAlignment = .center
+        characterLabel.font = UIFont.systemFont(ofSize: 44)
+        
+        characterView = UIView()
+        characterView.translatesAutoresizingMaskIntoConstraints = false
+        characterView.backgroundColor = .yellow
+        characterView.layer.cornerRadius = 15
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
