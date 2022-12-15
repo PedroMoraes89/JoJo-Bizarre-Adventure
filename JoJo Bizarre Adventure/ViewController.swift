@@ -14,7 +14,7 @@ class ViewController: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "Who is this JoJo Bizarre Adventure's character?"
         label.textAlignment = .center
-        label.font = UIFont.systemFont(ofSize: 44, weight: .bold)
+        label.font = UIFont.systemFont(ofSize: 56, weight: .bold)
         label.textColor = .white
         label.numberOfLines = 0
         return label
@@ -24,7 +24,8 @@ class ViewController: UIViewController {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .center
-        label.font = UIFont.systemFont(ofSize: 44)
+        label.font = UIFont.systemFont(ofSize: 44, weight: .bold)
+        label.textColor = .white
         return label
     }()
     
@@ -33,7 +34,8 @@ class ViewController: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = . right
         label.text = "Score: \(score)"
-        label.font = UIFont.systemFont(ofSize: 28)
+        label.font = UIFont.systemFont(ofSize: 28, weight: .bold)
+        label.textColor = .white
         return label
     }()
     
@@ -42,6 +44,8 @@ class ViewController: UIViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.addTarget(self, action: #selector(tappedButton), for: .touchUpInside)
         button.layer.cornerRadius = 15
+        button.layer.borderWidth = 5
+        button.layer.borderColor = UIColor.yellow.cgColor
         button.clipsToBounds = true
         button.backgroundColor = .black
         return button
@@ -52,6 +56,8 @@ class ViewController: UIViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.addTarget(self, action: #selector(tappedButton), for: .touchUpInside)
         button.layer.cornerRadius = 15
+        button.layer.borderWidth = 5
+        button.layer.borderColor = UIColor.yellow.cgColor
         button.clipsToBounds = true
         button.backgroundColor = .black
         return button
@@ -62,6 +68,8 @@ class ViewController: UIViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.addTarget(self, action: #selector(tappedButton), for: .touchUpInside)
         button.layer.cornerRadius = 15
+        button.layer.borderWidth = 5
+        button.layer.borderColor = UIColor.yellow.cgColor
         button.clipsToBounds = true
         button.backgroundColor = .black
         return button
@@ -114,13 +122,13 @@ class ViewController: UIViewController {
         var message: String
         
         if sender.tag == correctAnwser {
-            title = "Correct!"
-            message = "Congratulations!"
             score += 1
+            title = "Correct!"
+            message = "Congratulations! \(score)"
         } else {
-            title = "Wrong!"
-            message = "Try again!"
             score -= 1
+            title = "Wrong!"
+            message = "Try again! \(score)"
         }
         
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
