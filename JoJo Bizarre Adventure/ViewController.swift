@@ -10,67 +10,71 @@ import UIKit
 class ViewController: UIViewController {
     
     var titleLabel: UILabel = {
-        let titleLabel = UILabel()
-        titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        titleLabel.text = "Who is this JoJo Bizarre Adventure's character?"
-        titleLabel.textAlignment = .center
-        titleLabel.font = UIFont.systemFont(ofSize: 44, weight: .bold)
-        titleLabel.numberOfLines = 0
-        return titleLabel
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "Who is this JoJo Bizarre Adventure's character?"
+        label.textAlignment = .center
+        label.font = UIFont.systemFont(ofSize: 44, weight: .bold)
+        label.textColor = .white
+        label.numberOfLines = 0
+        return label
     }()
     
     var characterLabel: UILabel = {
-        let characterLabel = UILabel()
-        characterLabel.translatesAutoresizingMaskIntoConstraints = false
-        characterLabel.textAlignment = .center
-        characterLabel.font = UIFont.systemFont(ofSize: 44)
-        return characterLabel
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textAlignment = .center
+        label.font = UIFont.systemFont(ofSize: 44)
+        return label
     }()
     
     lazy var scoreLabel: UILabel = {
-        let scoreLabel = UILabel()
-        scoreLabel.translatesAutoresizingMaskIntoConstraints = false
-        scoreLabel.textAlignment = . right
-        scoreLabel.text = "Score: \(score)"
-        scoreLabel.font = UIFont.systemFont(ofSize: 28)
-        return scoreLabel
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textAlignment = . right
+        label.text = "Score: \(score)"
+        label.font = UIFont.systemFont(ofSize: 28)
+        return label
     }()
     
     var buttonOne: UIButton = {
-        let buttonOne = UIButton()
-        buttonOne.translatesAutoresizingMaskIntoConstraints = false
-        buttonOne.addTarget(self, action: #selector(tappedButton), for: .touchUpInside)
-        buttonOne.layer.cornerRadius = 15
-        buttonOne.backgroundColor = .black
-        return buttonOne
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.addTarget(self, action: #selector(tappedButton), for: .touchUpInside)
+        button.layer.cornerRadius = 15
+        button.clipsToBounds = true
+        button.backgroundColor = .black
+        return button
     }()
     
     var buttonTwo: UIButton = {
-        let buttonTwo = UIButton()
-        buttonTwo.translatesAutoresizingMaskIntoConstraints = false
-        buttonTwo.addTarget(self, action: #selector(tappedButton), for: .touchUpInside)
-        buttonTwo.layer.cornerRadius = 15
-        buttonTwo.backgroundColor = .black
-        return buttonTwo
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.addTarget(self, action: #selector(tappedButton), for: .touchUpInside)
+        button.layer.cornerRadius = 15
+        button.clipsToBounds = true
+        button.backgroundColor = .black
+        return button
     }()
     
     var buttonThree: UIButton = {
-        let buttonThree = UIButton()
-        buttonThree.translatesAutoresizingMaskIntoConstraints = false
-        buttonThree.addTarget(self, action: #selector(tappedButton), for: .touchUpInside)
-        buttonThree.layer.cornerRadius = 15
-        buttonThree.backgroundColor = .black
-        return buttonThree
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.addTarget(self, action: #selector(tappedButton), for: .touchUpInside)
+        button.layer.cornerRadius = 15
+        button.clipsToBounds = true
+        button.backgroundColor = .black
+        return button
     }()
     
-    lazy var characterView: UIStackView = {
-        let characterStackView = UIStackView(arrangedSubviews: [buttonOne, buttonTwo, buttonThree])
-        characterStackView.translatesAutoresizingMaskIntoConstraints = false
-        characterStackView.layer.cornerRadius = 15
-        characterStackView.spacing = 20
-        characterStackView.axis = .horizontal
-        characterStackView.distribution = .fillEqually
-        return characterStackView
+    lazy var characterStackView: UIStackView = {
+        let stackView = UIStackView(arrangedSubviews: [buttonOne, buttonTwo, buttonThree])
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.layer.cornerRadius = 15
+        stackView.spacing = 20
+        stackView.axis = .horizontal
+        stackView.distribution = .fillEqually
+        return stackView
     }()
     
     var score = 0 {
@@ -94,6 +98,17 @@ class ViewController: UIViewController {
         askQuestion()
     }
     
+    func askQuestion(action: UIAlertAction! = nil) {
+        character.shuffle()
+        correctAnwser = Int.random(in: 0...2)
+        
+        buttonOne.setImage(UIImage(named: character[0]), for: .normal)
+        buttonTwo.setImage(UIImage(named:character[1]), for: .normal)
+        buttonThree.setImage(UIImage(named: character[2]), for: .normal)
+        
+        characterLabel.text = character[correctAnwser].uppercased()
+    }
+    
     @objc func tappedButton(_ sender: UIButton) {
         var title: String
         var message: String
@@ -113,25 +128,12 @@ class ViewController: UIViewController {
         present(alert, animated: true)
     }
     
-    func askQuestion(action: UIAlertAction! = nil) {
-        character.shuffle()
-        correctAnwser = Int.random(in: 0...2)
-        
-        buttonOne.setImage(UIImage(named: character[0]), for: .normal)
-        buttonTwo.setImage(UIImage(named:character[1]), for: .normal)
-        buttonThree.setImage(UIImage(named: character[2]), for: .normal)
-        
-        buttonTwo.imageView?.adjustsImageSizeForAccessibilityContentSizeCategory = true
-        
-        characterLabel.text = character[correctAnwser].uppercased()
-    }
-    
     
     func addSubviews(){
         view.addSubview(titleLabel)
         view.addSubview(scoreLabel)
         view.addSubview(characterLabel)
-        view.addSubview(characterView)
+        view.addSubview(characterStackView)
 
     }
     
@@ -146,26 +148,20 @@ class ViewController: UIViewController {
             
             characterLabel.topAnchor.constraint(equalTo: scoreLabel.topAnchor, constant: 60),
             characterLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            
-//            buttonOne.topAnchor.constraint(equalTo: characterView.topAnchor, constant: 60),
-//            buttonOne.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: -400),
+        
             buttonOne.widthAnchor.constraint(equalToConstant: 240),
             buttonOne.heightAnchor.constraint(equalToConstant: 580),
-//
-//            buttonTwo.topAnchor.constraint(equalTo: buttonOne.topAnchor),
-//            buttonTwo.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+
             buttonTwo.widthAnchor.constraint(equalToConstant: 240),
             buttonTwo.heightAnchor.constraint(equalToConstant: 580),
-//
-//            buttonThree.topAnchor.constraint(equalTo: buttonOne.topAnchor),
-//            buttonThree.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 400),
+
             buttonThree.widthAnchor.constraint(equalToConstant: 240),
             buttonThree.heightAnchor.constraint(equalToConstant: 580),
             
-            characterView.topAnchor.constraint(equalTo: characterLabel.bottomAnchor, constant: 60),
-            characterView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
-            characterView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
-            characterView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20)
+            characterStackView.topAnchor.constraint(equalTo: characterLabel.bottomAnchor, constant: 60),
+            characterStackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
+            characterStackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
+            characterStackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20)
             
             
         ])
