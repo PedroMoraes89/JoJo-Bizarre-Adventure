@@ -41,7 +41,7 @@ class ViewController: UIViewController {
         buttonOne.translatesAutoresizingMaskIntoConstraints = false
         buttonOne.addTarget(self, action: #selector(tappedButton), for: .touchUpInside)
         buttonOne.layer.cornerRadius = 15
-        buttonOne.backgroundColor = .blue
+        buttonOne.backgroundColor = .black
         return buttonOne
     }()
     
@@ -50,7 +50,7 @@ class ViewController: UIViewController {
         buttonTwo.translatesAutoresizingMaskIntoConstraints = false
         buttonTwo.addTarget(self, action: #selector(tappedButton), for: .touchUpInside)
         buttonTwo.layer.cornerRadius = 15
-        buttonTwo.backgroundColor = .red
+        buttonTwo.backgroundColor = .black
         return buttonTwo
     }()
     
@@ -73,7 +73,11 @@ class ViewController: UIViewController {
         return characterStackView
     }()
     
-    var score = 0
+    var score = 0 {
+        didSet {
+            scoreLabel.text = "Score: \(score)"
+        }
+    }
     
     var character = [String]()
     var correctAnwser = 0
@@ -111,11 +115,13 @@ class ViewController: UIViewController {
     
     func askQuestion(action: UIAlertAction! = nil) {
         character.shuffle()
-        correctAnwser = Int.random(in: 0...3)
+        correctAnwser = Int.random(in: 0...2)
         
         buttonOne.setImage(UIImage(named: character[0]), for: .normal)
         buttonTwo.setImage(UIImage(named:character[1]), for: .normal)
         buttonThree.setImage(UIImage(named: character[2]), for: .normal)
+        
+        buttonTwo.imageView?.adjustsImageSizeForAccessibilityContentSizeCategory = true
         
         characterLabel.text = character[correctAnwser].uppercased()
     }
