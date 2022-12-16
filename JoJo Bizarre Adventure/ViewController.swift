@@ -43,9 +43,10 @@ class ViewController: UIViewController {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.addTarget(self, action: #selector(tappedButton), for: .touchUpInside)
-        button.layer.cornerRadius = 15
+        button.layer.cornerRadius = 8
         button.layer.borderWidth = 5
         button.layer.borderColor = UIColor.yellow.cgColor
+        button.contentMode = .scaleAspectFit
         button.clipsToBounds = true
         button.backgroundColor = .black
         return button
@@ -55,7 +56,7 @@ class ViewController: UIViewController {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.addTarget(self, action: #selector(tappedButton), for: .touchUpInside)
-        button.layer.cornerRadius = 15
+        button.layer.cornerRadius = 8
         button.layer.borderWidth = 5
         button.layer.borderColor = UIColor.yellow.cgColor
         button.clipsToBounds = true
@@ -67,9 +68,10 @@ class ViewController: UIViewController {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.addTarget(self, action: #selector(tappedButton), for: .touchUpInside)
-        button.layer.cornerRadius = 15
+        button.layer.cornerRadius = 8
         button.layer.borderWidth = 5
         button.layer.borderColor = UIColor.yellow.cgColor
+        button.contentMode = .scaleAspectFill
         button.clipsToBounds = true
         button.backgroundColor = .black
         return button
@@ -99,11 +101,12 @@ class ViewController: UIViewController {
    
         view.backgroundColor = .purple
         
-        character += ["diavolo", "dio", "jolyne", "jonathan", "joseph", "josuke", "jotaro", "kars", "kira", "pucci"]
+        character += ["diavolo", "dio", "giorno", "jolyne", "jonathan", "joseph", "josuke", "jotaro", "kars", "kira", "pucci"]
         
         addSubviews()
         addConstraints()
         askQuestion()
+        
     }
     
     func askQuestion(action: UIAlertAction! = nil) {
@@ -124,11 +127,11 @@ class ViewController: UIViewController {
         if sender.tag == correctAnwser {
             score += 1
             title = "Correct!"
-            message = "Congratulations! \(score)"
+            message = "Congratulations!"
         } else {
             score -= 1
             title = "Wrong!"
-            message = "Try again! \(score)"
+            message = "Try again!"
         }
         
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
@@ -171,9 +174,6 @@ class ViewController: UIViewController {
             characterStackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
             characterStackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20)
             
-            
         ])
     }
-
-
 }
