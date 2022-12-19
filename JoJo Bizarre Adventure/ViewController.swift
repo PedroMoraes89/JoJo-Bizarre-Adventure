@@ -15,7 +15,7 @@ class ViewController: UIViewController {
         label.text = "Who is this JoJo Bizarre Adventure's character?"
         label.textAlignment = .center
         label.font = UIFont.systemFont(ofSize: 56, weight: .bold)
-        label.textColor = .white
+        label.textColor = .yellow
         label.numberOfLines = 0
         return label
     }()
@@ -25,7 +25,7 @@ class ViewController: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .center
         label.font = UIFont.systemFont(ofSize: 44, weight: .bold)
-        label.textColor = .white
+        label.textColor = .yellow
         return label
     }()
     
@@ -35,7 +35,7 @@ class ViewController: UIViewController {
         label.textAlignment = . right
         label.text = "Score: \(score)"
         label.font = UIFont.systemFont(ofSize: 28, weight: .bold)
-        label.textColor = .white
+        label.textColor = .yellow
         return label
     }()
     
